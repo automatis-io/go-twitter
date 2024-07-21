@@ -3,9 +3,9 @@ module github.com/automatis-io/go-twitter
 go 1.17
 
 require (
-	github.com/cenkalti/backoff/v4 v4.1.3
-	github.com/dghubble/sling v1.4.0
-	github.com/stretchr/testify v1.8.1
+	github.com/cenkalti/backoff/v4 v4.3.0
+	github.com/dghubble/sling v1.4.2
+	github.com/stretchr/testify v1.9.0
 )
 
 require (
