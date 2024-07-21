@@ -27,17 +27,29 @@ func newMediaService(sling *sling.Sling) *MediaService {
 	}
 }
 
+const (
+	UploadMediaTypeTweetImage string = "tweet_image"
+	UploadMediaTypeTweetVideo string = "tweet_video"
+	UploadMediaTypeTweetGif   string = "tweet_gif"
+)
+
+type UploadParams struct {
+	MediaType        string
+	AdditionalOwners []string
+}
+
+type mediaInitParams struct {
+	Command          string   `url:"command"`
+	TotalBytes       int      `url:"total_bytes"`
+	MediaType        string   `url:"media_type"`
+	AdditionalOwners []string `url:"additional_owners"`
+}
+
 type mediaInitResult struct {
 	MediaID          int64  `json:"media_id"`
 	MediaIDString    string `json:"media_id_string"`
 	Size             int    `json:"size"`
 	ExpiresAfterSecs int    `json:"expires_after_secs"`
-}
-
-type mediaInitParams struct {
-	Command    string `url:"command"`
-	TotalBytes int    `url:"total_bytes"`
-	MediaType  string `url:"media_type"`
 }
 
 type mediaAppendParams struct {
@@ -54,11 +66,20 @@ type MediaVideoInfo struct {
 
 // MediaProcessingInfo holds information about pending media uploads.
 type MediaProcessingInfo struct {
-	State           string                `json:"state"`
-	CheckAfterSecs  int                   `json:"check_after_secs"`
-	ProgressPercent int                   `json:"progress_percent"`
-	Error           *MediaProcessingError `json:"error"`
+	State           MediaProcessingInfoState `json:"state"`
+	CheckAfterSecs  int                      `json:"check_after_secs"`
+	ProgressPercent int                      `json:"progress_percent"`
+	Error           *MediaProcessingError    `json:"error"`
 }
+
+type MediaProcessingInfoState string
+
+const (
+	MediaProcessingInfoStatePending    MediaProcessingInfoState = "pending"
+	MediaProcessingInfoStateInProgress MediaProcessingInfoState = "in_progress"
+	MediaProcessingInfoStateFailed     MediaProcessingInfoState = "failed"
+	MediaProcessingInfoStateSucceeded  MediaProcessingInfoState = "succeeded"
+)
 
 // MediaProcessingError holds information about pending media
 // processing failures.
@@ -95,16 +116,17 @@ type mediaFinalizeParams struct {
 // MediaFinalizeResult will have the ProcessingInfo field set, and you
 // can periodically poll Status with the MediaID to get the status of
 // the upload.
-func (m *MediaService) Upload(media []byte, mediaType string) (*MediaUploadResult, *http.Response, error) {
+func (m *MediaService) Upload(media []byte, uploadParams UploadParams) (*MediaUploadResult, *http.Response, error) {
 
 	if len(media) > maxSize {
 		return nil, nil, fmt.Errorf("file size of %v exceeds twitter maximum %v", len(media), maxSize)
 	}
 
 	params := &mediaInitParams{
-		Command:    "INIT",
-		TotalBytes: len(media),
-		MediaType:  mediaType,
+		Command:          "INIT",
+		TotalBytes:       len(media),
+		MediaType:        uploadParams.MediaType,
+		AdditionalOwners: uploadParams.AdditionalOwners,
 	}
 	res := new(mediaInitResult)
 	apiError := new(APIError)
@@ -184,5 +206,4 @@ func (m *MediaService) Status(mediaID int64) (*MediaStatusResult, *http.Response
 	apiError := new(APIError)
 	resp, err := m.sling.New().Get("upload.json").QueryStruct(params).Receive(status, apiError)
 	return status, resp, relevantError(err, *apiError)
-
 }
