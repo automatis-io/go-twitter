@@ -1,10 +1,10 @@
-# go-twitter [![Build Status](https://github.com/drswork/go-twitter/workflows/test/badge.svg)](https://github.com/drswork/go-twitter/actions?query=workflow%3Atest+branch%3Amaster) [![GoDoc](https://godoc.org/github.com/drswork/go-twitter?status.svg)](https://godoc.org/github.com/drswork/go-twitter)
+# go-twitter [![Build Status](https://github.com/automatis-io/go-twitter/workflows/test/badge.svg)](https://github.com/automatis-io/go-twitter/actions?query=workflow%3Atest+branch%3Amaster) [![GoDoc](https://godoc.org/github.com/automatis-io/go-twitter?status.svg)](https://godoc.org/github.com/automatis-io/go-twitter)
 
 <img align="right" src="https://storage.googleapis.com/dghubble/gopher-on-bird.png">
 
 go-twitter is a Go client library for the [Twitter API](https://dev.twitter.com/rest/public). Check the [usage](#usage) section or try the [examples](/examples) to see how to access the Twitter API.
 
-This is a fork of the [original Go Twitter API](https://github.com/dghubble/go-twitter) which doesn't appear to be actively maintained.
+This is a fork of the [original Go Twitter API](https://github.com/automatis-io/go-twitter) which doesn't appear to be actively maintained.
 
 ### Features
 
@@ -32,11 +32,11 @@ This is a fork of the [original Go Twitter API](https://github.com/dghubble/go-t
 
 ## Install
 
-    go get github.com/drswork/go-twitter/twitter
+    go get github.com/automatis-io/go-twitter/twitter
 
 ## Documentation
 
-Read [GoDoc](https://godoc.org/github.com/drswork/go-twitter/twitter)
+Read [GoDoc](https://godoc.org/github.com/automatis-io/go-twitter/twitter)
 
 ## Usage
 
@@ -229,7 +229,7 @@ For example, make requests as a consumer application on behalf of a user who has
 ```go
 // OAuth1
 import (
-    "github.com/drswork/go-twitter/twitter"
+"github.com/automatis-io/go-twitter/twitter"
     "github.com/dghubble/oauth1"
 )
 
@@ -247,7 +247,7 @@ If no user auth context is needed, make requests as your application with applic
 ```go
 // OAuth2
 import (
-    "github.com/drswork/go-twitter/twitter"
+"github.com/automatis-io/go-twitter/twitter"
     "golang.org/x/oauth2"
     "golang.org/x/oauth2/clientcredentials"
 )

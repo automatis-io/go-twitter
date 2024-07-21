@@ -1,4 +1,4 @@
-module github.com/drswork/go-twitter
+module github.com/automatis-io/go-twitter
 
 go 1.17
 

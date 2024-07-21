@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/automatis-io/go-twitter/twitter"
 	"github.com/coreos/pkg/flagutil"
-	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
 )
 
