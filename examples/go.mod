@@ -3,10 +3,14 @@ module github.com/automatis-io/go-twitter/examples
 go 1.22
 
 require (
-	github.com/cenkalti/backoff v2.1.1+incompatible // indirect
-	github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f // indirect
-	github.com/automatis-io/go-twitter v0.0.0-20190512073027-53f972dc4b06 // indirect
-	github.com/dghubble/oauth1 v0.6.0 // indirect
-	github.com/dghubble/sling v1.3.0 // indirect
-	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45 // indirect
+	github.com/automatis-io/go-twitter v1.0.0
+	github.com/coreos/pkg v0.0.0-20240122114842-bbd7aa9bf6fb
+	github.com/dghubble/oauth1 v0.7.3
+	golang.org/x/oauth2 v0.21.0
+)
+
+require (
+	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
+	github.com/dghubble/sling v1.4.2 // indirect
+	github.com/google/go-querystring v1.1.0 // indirect
 )
