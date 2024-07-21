@@ -20,9 +20,6 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
-      - name: Build
-        run: go build ./cmd/automatis
-
       - name: Lint
         uses: golangci/golangci-lint-action@v4
         with:
