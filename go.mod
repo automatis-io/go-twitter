@@ -1,6 +1,6 @@
 module github.com/automatis-io/go-twitter
 
-go 1.17
+go 1.22
 
 require (
 	github.com/cenkalti/backoff/v4 v4.3.0
